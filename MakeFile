@@ -1,0 +1,23 @@
+CFLAGS := -c
+CC := gcc
+TASK := sever
+TASK += client
+OBJ := dict_sever.o dict_client.o
+.PHONY:all
+all:$(TASK)
+
+sever: dict_sever.o
+	$(CC) $^ -o $@
+
+client: dict_client.o
+	$(CC) $^ -o $@
+
+%.o:%.c
+	@echo "compile source file to object file"
+	$(CC) $(CFLAGS) $< -o $@
+
+.PHONY:clean
+clean:
+	@echo "clean all task files and object files"
+	$(RM) $(TASK) $(OBJ)
+	
